@@ -171,10 +171,11 @@ Screenshot
 
 Requirements
 ============
-Python 2.7
-lxml
-qualysapi
-texttable
+
+1. Python 2.6+
+2. lxml
+3. qualysapi
+4. texttable
 
 How to install libraries
 ------------------------
