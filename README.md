@@ -67,106 +67,106 @@ Usage
 
 Screenshot
 
-$ python qualysguard_scan_queue.py --option_profile 56358 --scan --concurrency_limit 2 --tag 'Hostname contains QA'
-
-+-------------------------+-------------------------+-------------------------+
-|          App #          |        App name         |        App ID #         |
-+=========================+=========================+=========================+
-|                       1 | My Co. - QA Lab - Demo  | 41325                   |
-|                         | 6                       |                         |
-+-------------------------+-------------------------+-------------------------+
-|                       2 | My Co. - QA Lab - Demo  | 51326                   |
-|                         | 11                      |                         |
-+-------------------------+-------------------------+-------------------------+
-|                         | Catalog Web             |                         |
-|                       3 | Application: hpux444444 | 562256                  |
-|                         | 0-7.vuln.qa.my-com.com, |                         |
-|                         | Port 2222               |                         |
-+-------------------------+-------------------------+-------------------------+
-|                         | Catalog Web             |                         |
-|                       4 | Application: sql2k-qnim | 6106459                 |
-|                         | sp2-3.patch.na.vuln.qa. |                         |
-|                         | my-com.com, Port 8080   |                         |
-+-------------------------+-------------------------+-------------------------+
-|                         | Catalog Web             |                         |
-|                       5 | Application: sol10-qnim | 1793795                 |
-|                         | bus212.prod.qa.my-com.c |                         |
-|                         | om, Port 67899          |                         |
-+-------------------------+-------------------------+-------------------------+
-
-Checking number of web application scans in use...
-Scanning My Co. - QA Lab - Demo 6 (web app ID 41325)...
-Done:
-<?xml version="1.0" encoding="UTF-8"?>
-<ServiceResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://qualysapi.qualys.com/qps/xsd/3.0/was/wasscan.xsd">
-  <responseCode>SUCCESS</responseCode>
-  <count>1</count>
-  <data>
-    <WasScan>
-      <id>2763740</id>
-    </WasScan>
-  </data>
-</ServiceResponse>
-
-Checking number of web application scans in use...
-Scanning My Co. - QA Lab - Demo 11 (web app ID 51326)...
-Done:
-<?xml version="1.0" encoding="UTF-8"?>
-<ServiceResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://qualysapi.qualys.com/qps/xsd/3.0/was/wasscan.xsd">
-  <responseCode>SUCCESS</responseCode>
-  <count>1</count>
-  <data>
-    <WasScan>
-      <id>2763741</id>
-    </WasScan>
-  </data>
-</ServiceResponse>
-
-Checking number of web application scans in use...
-Too many web application scans running. Trying again in 300 seconds.
-Checking number of web application scans in use...
-Scanning Catalog Web Application: hpux4444440-7.vuln.qa.my-com.com, Port 2222 (web app ID 562256)...
-Done:
-<?xml version="1.0" encoding="UTF-8"?>
-<ServiceResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://qualysapi.qualys.com/qps/xsd/3.0/was/wasscan.xsd">
-  <responseCode>SUCCESS</responseCode>
-  <count>1</count>
-  <data>
-    <WasScan>
-      <id>2763742</id>
-    </WasScan>
-  </data>
-</ServiceResponse>
-
-Checking number of web application scans in use...
-Scanning Catalog Web Application: sql2k-qnimsp2-3.patch.na.vuln.qa.my-com.com, Port 8080 (web app ID 2106459)...
-Done:
-<?xml version="1.0" encoding="UTF-8"?>
-<ServiceResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://qualysapi.qualys.com/qps/xsd/3.0/was/wasscan.xsd">
-  <responseCode>SUCCESS</responseCode>
-  <count>1</count>
-  <data>
-    <WasScan>
-      <id>2763743</id>
-    </WasScan>
-  </data>
-</ServiceResponse>
-
-Checking number of web application scans in use...
-Too many web application scans running. Trying again in 300 seconds.
-Checking number of web application scans in use...
-Scanning Catalog Web Application: sol10-qnimbus212.prod.qa.my-com.com, Port 67899 (web app ID 1793795)...
-Done:
-<?xml version="1.0" encoding="UTF-8"?>
-<ServiceResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://qualysapi.qualys.com/qps/xsd/3.0/was/wasscan.xsd">
-  <responseCode>SUCCESS</responseCode>
-  <count>1</count>
-  <data>
-    <WasScan>
-      <id>2763745</id>
-    </WasScan>
-  </data>
-</ServiceResponse>
+    $ python qualysguard_scan_queue.py --option_profile 56358 --scan --concurrency_limit 2 --tag 'Hostname contains QA'
+    
+    +-------------------------+-------------------------+-------------------------+
+    |          App #          |        App name         |        App ID #         |
+    +=========================+=========================+=========================+
+    |                       1 | My Co. - QA Lab - Demo  | 41325                   |
+    |                         | 6                       |                         |
+    +-------------------------+-------------------------+-------------------------+
+    |                       2 | My Co. - QA Lab - Demo  | 51326                   |
+    |                         | 11                      |                         |
+    +-------------------------+-------------------------+-------------------------+
+    |                         | Catalog Web             |                         |
+    |                       3 | Application: hpux444444 | 562256                  |
+    |                         | 0-7.vuln.qa.my-com.com, |                         |
+    |                         | Port 2222               |                         |
+    +-------------------------+-------------------------+-------------------------+
+    |                         | Catalog Web             |                         |
+    |                       4 | Application: sql2k-qnim | 6106459                 |
+    |                         | sp2-3.patch.na.vuln.qa. |                         |
+    |                         | my-com.com, Port 8080   |                         |
+    +-------------------------+-------------------------+-------------------------+
+    |                         | Catalog Web             |                         |
+    |                       5 | Application: sol10-qnim | 1793795                 |
+    |                         | bus212.prod.qa.my-com.c |                         |
+    |                         | om, Port 67899          |                         |
+    +-------------------------+-------------------------+-------------------------+
+    
+    Checking number of web application scans in use...
+    Scanning My Co. - QA Lab - Demo 6 (web app ID 41325)...
+    Done:
+    <?xml version="1.0" encoding="UTF-8"?>
+    <ServiceResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://qualysapi.qualys.com/qps/xsd/3.0/was/wasscan.xsd">
+      <responseCode>SUCCESS</responseCode>
+      <count>1</count>
+      <data>
+        <WasScan>
+          <id>2763740</id>
+        </WasScan>
+      </data>
+    </ServiceResponse>
+    
+    Checking number of web application scans in use...
+    Scanning My Co. - QA Lab - Demo 11 (web app ID 51326)...
+    Done:
+    <?xml version="1.0" encoding="UTF-8"?>
+    <ServiceResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://qualysapi.qualys.com/qps/xsd/3.0/was/wasscan.xsd">
+      <responseCode>SUCCESS</responseCode>
+      <count>1</count>
+      <data>
+        <WasScan>
+          <id>2763741</id>
+        </WasScan>
+      </data>
+    </ServiceResponse>
+    
+    Checking number of web application scans in use...
+    Too many web application scans running. Trying again in 300 seconds.
+    Checking number of web application scans in use...
+    Scanning Catalog Web Application: hpux4444440-7.vuln.qa.my-com.com, Port 2222 (web app ID 562256)...
+    Done:
+    <?xml version="1.0" encoding="UTF-8"?>
+    <ServiceResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://qualysapi.qualys.com/qps/xsd/3.0/was/wasscan.xsd">
+      <responseCode>SUCCESS</responseCode>
+      <count>1</count>
+      <data>
+        <WasScan>
+          <id>2763742</id>
+        </WasScan>
+      </data>
+    </ServiceResponse>
+    
+    Checking number of web application scans in use...
+    Scanning Catalog Web Application: sql2k-qnimsp2-3.patch.na.vuln.qa.my-com.com, Port 8080 (web app ID 2106459)...
+    Done:
+    <?xml version="1.0" encoding="UTF-8"?>
+    <ServiceResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://qualysapi.qualys.com/qps/xsd/3.0/was/wasscan.xsd">
+      <responseCode>SUCCESS</responseCode>
+      <count>1</count>
+      <data>
+        <WasScan>
+          <id>2763743</id>
+        </WasScan>
+      </data>
+    </ServiceResponse>
+    
+    Checking number of web application scans in use...
+    Too many web application scans running. Trying again in 300 seconds.
+    Checking number of web application scans in use...
+    Scanning Catalog Web Application: sol10-qnimbus212.prod.qa.my-com.com, Port 67899 (web app ID 1793795)...
+    Done:
+    <?xml version="1.0" encoding="UTF-8"?>
+    <ServiceResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://qualysapi.qualys.com/qps/xsd/3.0/was/wasscan.xsd">
+      <responseCode>SUCCESS</responseCode>
+      <count>1</count>
+      <data>
+        <WasScan>
+          <id>2763745</id>
+        </WasScan>
+      </data>
+    </ServiceResponse>
 
 
 Requirements
