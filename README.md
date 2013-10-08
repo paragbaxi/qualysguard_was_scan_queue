@@ -7,6 +7,7 @@ Workflow
 ========
 
 Here's what the script does:
+
 1. Selects the applications you want to scan based on filters.
 2. Lists selected applications.
 3. Runs scans against applications.
