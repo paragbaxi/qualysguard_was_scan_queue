@@ -15,6 +15,8 @@ import base64, urllib2
 import datetime, time
 import logging
 import os
+import unicodedata
+
 from collections import defaultdict
 from lxml import objectify
 from texttable import Texttable
@@ -52,7 +54,7 @@ def list_apps(apps):
 
 # Start of script.
 # Declare the command line flags/options we want to allow.
-parser = argparse.ArgumentParser(description = 'Run multiple QualysGuard WAS v2 scans.')
+parser = argparse.ArgumentParser(description = 'Automate sequential scanning of multiple QualysGuard webapps.')
 parser.add_argument('-a', '--all_apps', action = 'store_true',
                     help = 'Select all web applications. Overwrites any tag filters.')
 parser.add_argument('-c', '--concurrency_limit', default = 10,
@@ -116,6 +118,7 @@ base64string = base64.encodestring('%s:%s' % (c_args.username, c_args.password))
 # There may be more than 1000 apps so start with first possible record, # 0.
 last_record = '0'
 apps_to_scan = []
+print 'Downloading list of applications.'
 while True:
     # Get list of web apps.
     query_uri = 'https://qualysapi.qualys.com/qps/rest/3.0/search/was/webapp'
@@ -146,13 +149,19 @@ while True:
     tree = objectify.fromstring(search_apps)
     for webapp in tree.data.WebApp:
         app = defaultdict(str)
-        app['name']=webapp.name
-        app['id']=webapp.id
+        app_name = webapp.name.text
+        # App name may be in unicode.
+        if isinstance(app_name, unicode):
+            # Decode to string.
+            app_name = unicodedata.normalize('NFKD', app_name).encode('ascii','ignore')
+        app['name'] = app_name
+        app['id']=webapp.id.text
         apps_to_scan.append(app)
     if tree.hasMoreRecords.text == 'true':
         last_record = tree.lastId.text
     else:
         break
+print '\n'
 logging.info('apps_to_scan = %s' % (apps_to_scan))
 if c_args.list:
     list_apps(apps_to_scan)
@@ -182,7 +191,7 @@ for app in apps_to_scan:
         scans_submitted = qg_was_api(query_uri, data)
         tree = objectify.fromstring(scans_submitted)
         # Add to total of current scans slots used.
-        number_scans_submitted = tree.count
+        number_scans_submitted = tree.count.text
         logging.debug('Number of scans submitted = %s' % (str(number_scans_submitted)))
         current_scans += number_scans_submitted
         # How many are currently running?
@@ -196,9 +205,9 @@ for app in apps_to_scan:
         # Make request
         scans_running = qg_was_api(query_uri, data)
         tree = objectify.fromstring(scans_running)
-        number_scans_running = tree.count
+        number_scans_running = tree.count.text
         # Add to total of current scans slots used.
-        logging.debug('Number of scans running = %s' % (str(tree.count)))
+        logging.debug('Number of scans running = %s' % (tree.count))
         current_scans += number_scans_running
         logging.debug('current_scans = %s' % (str(current_scans)))
         # Have we hit the limit?
