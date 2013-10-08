@@ -181,7 +181,9 @@ How to install libraries
 ------------------------
 
 Install pip:
-$ curl https://raw.github.com/pypa/pip/master/contrib/get-pip.py | sudo python
+
+    curl https://raw.github.com/pypa/pip/master/contrib/get-pip.py | sudo python
 
 Install libraries:
-pip install lxml qualysapi texttable
+
+    pip install lxml qualysapi texttable
