@@ -34,3 +34,11 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+*.log
+
+*.xml
+
+.idea/.name
+
+.idea/qualysguard_was_scan_queue.iml
