@@ -52,8 +52,8 @@ parser.add_argument('--debug', action = 'store_true',
                     help = 'Outputs additional information to log.')
 parser.add_argument('-f', '--file', default = 'apps.txt',
                     help = 'Output file to store XML results from initiating scans. (Default = apps.txt)')
-parser.add_argument('-l', '--list', action = 'store_true', default = True,
-                    help = 'List all selected web applications. (Default = True)')
+parser.add_argument('-l', '--no_list', action = 'store_true', default = True,
+                    help = 'Do not list all selected web applications. (Default = False)')
 parser.add_argument('-o', '--option_profile',
                     help = 'Scan selected web applications with OPTION_PROFILE ID.')
 parser.add_argument('-s', '--scan', action = 'store_true',
@@ -68,6 +68,7 @@ parser.add_argument('-y', '--scan_type', default = 'discovery',
 c_args = parser.parse_args()
 # Check arguments.
 if c_args.option_profile and c_args.scan:
+    print 'An option profile must be set to run a scan.'
     parser.print_help()
     exit(1)
 # Create log directory.
@@ -147,7 +148,7 @@ while True:
         break
 print '\n'
 logging.info('apps_to_scan = %s' % (apps_to_scan))
-if c_args.list:
+if not c_args.no_list:
     list_apps(apps_to_scan)
 if not c_args.scan:
     print ''
@@ -177,7 +178,7 @@ for app in apps_to_scan:
         # Add to total of current scans slots used.
         number_scans_submitted = tree.count.text
         logging.debug('Number of scans submitted = %s' % (str(number_scans_submitted)))
-        current_scans += number_scans_submitted
+        current_scans += int(number_scans_submitted)
         # How many are currently running?
         query_uri = '/count/was/wasscan'
         data = '''
@@ -192,7 +193,7 @@ for app in apps_to_scan:
         number_scans_running = tree.count.text
         # Add to total of current scans slots used.
         logging.debug('Number of scans running = %s' % (tree.count.text))
-        current_scans += number_scans_running
+        current_scans += int(number_scans_running)
         logging.debug('current_scans = %s' % (str(current_scans)))
         # Have we hit the limit?
         if current_scans >= c_args.concurrency_limit:
