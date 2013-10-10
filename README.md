@@ -188,4 +188,4 @@ Install pip:
 
 Install libraries:
 
-    pip install lxml qualysapi texttable
+    pip install lxml qualysapi Texttable
