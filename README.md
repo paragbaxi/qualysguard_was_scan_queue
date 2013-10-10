@@ -34,10 +34,10 @@ Usage
 =====
 
     usage: qualysguard_scan_queue.py [-h] [-a] [-c CONCURRENCY_LIMIT]
-                                     [--config CONFIG] [-d DELAY] [--debug]
-                                     [-f FILE] [-l] [-o OPTION_PROFILE] [-s]
-                                     [-t TAG] [-y SCAN_TYPE]
-    
+                                 [--config CONFIG] [-d DELAY] [--debug]
+                                 [-f FILE] [-l] [-o OPTION_PROFILE] [-s]
+                                 [-t TAG] [-y SCAN_TYPE]
+
     Automate sequential scanning of multiple QualysGuard webapps.
     
     optional arguments:
@@ -49,12 +49,13 @@ Usage
                             (Default = 10)
       --config CONFIG       Configuration for Qualys connector.
       -d DELAY, --delay DELAY
-                            Wait DELAY Minutes between scan attempts if
-                            concurrency limit is reached. (Default = 5)
+                            Wait DELAY seconds between scan attempts if
+                            concurrency limit is reached. (Default = 60)
       --debug               Outputs additional information to log.
       -f FILE, --file FILE  Output file to store XML results from initiating
                             scans. (Default = apps.txt)
-      -l, --list            List all selected web applications. (Default = True)
+      -l, --no_list         Do not list all selected web applications. (Default =
+                            False)
       -o OPTION_PROFILE, --option_profile OPTION_PROFILE
                             Scan selected web applications with OPTION_PROFILE ID.
       -s, --scan            Scan all selected web applications.
@@ -63,6 +64,7 @@ Usage
       -y SCAN_TYPE, --scan_type SCAN_TYPE
                             Scan type: discovery, vulnerability. (Default =
                             discovery)
+
 
 
 Screenshot
