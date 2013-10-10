@@ -46,8 +46,8 @@ parser.add_argument('-c', '--concurrency_limit', default = 10,
                     help = 'Limit scans to CONCURRENCY_LIMIT simultaneous scans. (Default = 10)')
 parser.add_argument('--config',
                     help = 'Configuration for Qualys connector.')
-parser.add_argument('-d', '--delay', default = 5,
-                    help = 'Wait DELAY Minutes between scan attempts if concurrency limit is reached. (Default = 5)')
+parser.add_argument('-d', '--delay', default = 60,
+                    help = 'Wait DELAY seconds between scan attempts if concurrency limit is reached. (Default = 60)')
 parser.add_argument('--debug', action = 'store_true',
                     help = 'Outputs additional information to log.')
 parser.add_argument('-f', '--file', default = 'apps.txt',
@@ -198,9 +198,9 @@ for app in apps_to_scan:
         # Have we hit the limit?
         if current_scans >= c_args.concurrency_limit:
             # Hit concurrency limit. Wait.
-            logging.debug('Concurrency limit met. Delaying scan. Trying again in %s seconds.' % (str(60*c_args.delay)))
-            print 'Too many web application scans running. Trying again in %s seconds.' % (str(60*c_args.delay))
-            time.sleep(60*c_args.delay)
+            logging.debug('Concurrency limit met. Delaying scan. Trying again in %s seconds.' % (str(c_args.delay)))
+            print 'Too many web application scans running. Trying again in %s seconds.' % (str(c_args.delay))
+            time.sleep(c_args.delay)
         else:
             # Under concurrency limit, do not delay.
             logging.debug('Running scan.')
