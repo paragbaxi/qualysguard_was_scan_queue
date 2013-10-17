@@ -58,6 +58,7 @@ Usage
                             False)
       -o OPTION_PROFILE, --option_profile OPTION_PROFILE
                             Scan selected web applications with OPTION_PROFILE ID.
+      -r, --randomize       Randomize scanning of web applications.
       -s, --scan            Scan all selected web applications.
       -t TAG, --tag TAG     Filter selection of web applications to those with
                             TAG.
