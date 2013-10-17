@@ -16,6 +16,7 @@ import datetime, time
 import logging
 import os
 import qualysapi
+import random
 import unicodedata
 
 from collections import defaultdict
@@ -39,7 +40,7 @@ def list_apps(apps):
 
 # Start of script.
 # Declare the command line flags/options we want to allow.
-parser = argparse.ArgumentParser(description = 'Automate sequential scanning of multiple QualysGuard webapps.')
+parser = argparse.ArgumentParser(description = 'Automate concurrent scanning of multiple QualysGuard webapps.')
 parser.add_argument('-a', '--all_apps', action = 'store_true',
                     help = 'Select all web applications. Overwrites any tag filters.')
 parser.add_argument('-c', '--concurrency_limit', default = 10,
@@ -56,6 +57,8 @@ parser.add_argument('-l', '--no_list', action = 'store_true', default = True,
                     help = 'Do not list all selected web applications. (Default = False)')
 parser.add_argument('-o', '--option_profile',
                     help = 'Scan selected web applications with OPTION_PROFILE ID.')
+parser.add_argument('-r', '--randomize', action = 'store_true',
+                    help = 'Randomize scanning of web applications.')
 parser.add_argument('-s', '--scan', action = 'store_true',
                     help = 'Scan all selected web applications.')
 parser.add_argument('-t', '--tag',
@@ -67,7 +70,7 @@ parser.add_argument('-y', '--scan_type', default = 'discovery',
 # Parse arguements.
 c_args = parser.parse_args()
 # Check arguments.
-if c_args.option_profile and c_args.scan:
+if (not c_args.option_profile and c_args.scan) or (c_args.option_profile and not c_args.scan):
     print 'An option profile must be set to run a scan.'
     parser.print_help()
     exit(1)
@@ -153,6 +156,9 @@ if not c_args.no_list:
 if not c_args.scan:
     print ''
     exit()
+# Randomize order of webapps to scan, if requested.
+if c_args.randomize:
+    random.shuffle(apps_to_scan)
 # Start scanning.
 apps_scanned=[]
 logging.debug('Writing results of initiating app scans to %s' %(c_args.file))
