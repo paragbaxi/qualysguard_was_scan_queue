@@ -67,7 +67,7 @@ parser.add_argument('-t', '--tag',
 #                    help = 'Filter selection of web applications to those with all tags from TAGS_FILE (tags combined using a logical AND). Tags from file should be separated by line break.')
 parser.add_argument('-y', '--scan_type', default = 'discovery',
                     help = 'Scan type: discovery, vulnerability. (Default = discovery)')
-# Parse arguements.
+# Parse arguments.
 c_args = parser.parse_args()
 # Check arguments.
 if (not c_args.option_profile and c_args.scan) or (c_args.option_profile and not c_args.scan):
