@@ -53,7 +53,7 @@ parser.add_argument('--debug', action = 'store_true',
                     help = 'Outputs additional information to log.')
 parser.add_argument('-f', '--file', default = 'apps.txt',
                     help = 'Output file to store XML results from initiating scans. (Default = apps.txt)')
-parser.add_argument('-l', '--no_list', action = 'store_true', default = True,
+parser.add_argument('-l', '--no_list', action = 'store_true', default = False,
                     help = 'Do not list all selected web applications. (Default = False)')
 parser.add_argument('-o', '--option_profile',
                     help = 'Scan selected web applications with OPTION_PROFILE ID.')
