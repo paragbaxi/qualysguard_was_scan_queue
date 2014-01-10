@@ -10,7 +10,7 @@ Here's what the script does:
 
 1. Selects the applications you want to scan based on filters.
 2. Lists selected applications.
-3. Runs scans against applications.
+3. Runs scans against applications using default option profile (can be overridden).
 
 Examples
 ========
@@ -57,7 +57,8 @@ Usage
       -l, --no_list         Do not list all selected web applications. (Default =
                             False)
       -o OPTION_PROFILE, --option_profile OPTION_PROFILE
-                            Scan selected web applications with OPTION_PROFILE ID.
+                            Optionally override default option profile to scan 
+                            selected web applications with OPTION_PROFILE ID.
       -r, --randomize       Randomize scanning of web applications.
       -s, --scan            Scan all selected web applications.
       -t TAG, --tag TAG     Filter selection of web applications to those with
