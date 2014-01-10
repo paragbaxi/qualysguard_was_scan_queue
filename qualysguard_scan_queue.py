@@ -56,7 +56,7 @@ parser.add_argument('-f', '--file', default = 'apps.txt',
 parser.add_argument('-l', '--no_list', action = 'store_true', default = False,
                     help = 'Do not list all selected web applications. (Default = False)')
 parser.add_argument('-o', '--option_profile',
-                    help = 'Scan selected web applications with OPTION_PROFILE ID.')
+                    help = 'Optionally override default option profile to scan selected web applications with OPTION_PROFILE ID.')
 parser.add_argument('-r', '--randomize', action = 'store_true',
                     help = 'Randomize scanning of web applications.')
 parser.add_argument('-s', '--scan', action = 'store_true',
@@ -69,11 +69,6 @@ parser.add_argument('-y', '--scan_type', default = 'discovery',
                     help = 'Scan type: discovery, vulnerability. (Default = discovery)')
 # Parse arguments.
 c_args = parser.parse_args()
-# Check arguments.
-if (not c_args.option_profile and c_args.scan) or (c_args.option_profile and not c_args.scan):
-    print 'An option profile must be set to run a scan.'
-    parser.print_help()
-    exit(1)
 # Create log directory.
 PATH_LOG = 'log'
 if not os.path.exists(PATH_LOG):
@@ -211,28 +206,45 @@ for app in apps_to_scan:
             # Under concurrency limit, do not delay.
             logging.debug('Running scan.')
             break
-    # Scan web app.
+        # Scan web app.
     query_uri = '/launch/was/wasscan'
     # Setup request to scan web app.
-    option_profile = c_args.option_profile
     scan_type = c_args.scan_type.upper()
-    data = '''
-        <ServiceRequest>
-            <data>
-                <WasScan>
-                    <name>Auto %s</name>
-                    <type>%s</type>
-                    <target>
-                        <webApp>
+    if c_args.option_profile:
+        # Override default option profile.
+        data = '''
+            <ServiceRequest>
+                <data>
+                    <WasScan>
+                        <name>Auto %s</name>
+                        <type>%s</type>
+                        <target>
+                            <webApp>
+                                <id>%s</id>
+                            </webApp>
+                        </target>
+                        <profile>
                             <id>%s</id>
-                        </webApp>
-                    </target>
-                    <profile>
-                        <id>%s</id>
-                    </profile>
-                </WasScan>
-            </data>
-        </ServiceRequest>''' % (app['name'], scan_type, app['id'], option_profile)
+                        </profile>
+                    </WasScan>
+                </data>
+            </ServiceRequest>''' % (app['name'], scan_type, app['id'], c_args.option_profile)
+    else:
+        # Scan using default option profile.
+        data = '''
+            <ServiceRequest>
+                <data>
+                    <WasScan>
+                        <name>Auto %s</name>
+                        <type>%s</type>
+                        <target>
+                            <webApp>
+                                <id>%s</id>
+                            </webApp>
+                        </target>
+                    </WasScan>
+                </data>
+            </ServiceRequest>''' % (app['name'], scan_type, app['id'])
     # Make request
     logging.info('Scanning %s (web app ID %s)...' % (app['name'], app['id']))
     print 'Scanning %s (web app ID %s)...' % (app['name'], app['id'])
