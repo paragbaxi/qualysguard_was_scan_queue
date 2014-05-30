@@ -94,8 +94,8 @@ if c_args.debug:
 else:
     logging.basicConfig(filename=LOG_FILENAME, format='%(asctime)s %(message)s',
                         level=logging.INFO)
-# Validate arguements.
-if not ((c_args.all_apps or c_args.tag or c_args.Tags_file)):
+# Validate arguments.
+if not (c_args.all_apps or c_args.tag): # or c_args.Tags_file)):
     parser.print_help()
     logging.error('Invalid run parameters.')
     exit(1)
