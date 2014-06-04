@@ -34,11 +34,13 @@ Usage
 =====
 
     usage: qualysguard_scan_queue.py [-h] [-a] [-c CONCURRENCY_LIMIT]
-                                 [--config CONFIG] [-d DELAY] [--debug]
-                                 [-f FILE] [-l] [-o OPTION_PROFILE] [-s]
-                                 [-t TAG] [-y SCAN_TYPE]
-
-    Automate sequential scanning of multiple QualysGuard webapps.
+                                     [--concurrent_scans_retries CONCURRENT_SCANS_RETRIES]
+                                     [--concurrent_scans_retry_delay CONCURRENT_SCANS_RETRY_DELAY]
+                                     [--config CONFIG] [-d DELAY] [--debug]
+                                     [-f FILE] [-l] [-o OPTION_PROFILE] [-r] [-s]
+                                     [-t TAG] [-y SCAN_TYPE]
+    
+    Automate concurrent scanning of multiple QualysGuard webapps.
     
     optional arguments:
       -h, --help            show this help message and exit
@@ -47,6 +49,12 @@ Usage
       -c CONCURRENCY_LIMIT, --concurrency_limit CONCURRENCY_LIMIT
                             Limit scans to CONCURRENCY_LIMIT simultaneous scans.
                             (Default = 10)
+      --concurrent_scans_retries CONCURRENT_SCANS_RETRIES
+                            Retry the call this many times if your subscription
+                            hits the concurrent scans limit. (Default = 0)
+      --concurrent_scans_retry_delay CONCURRENT_SCANS_RETRY_DELAY
+                            Delay in seconds between retrying when subscription
+                            hits the concurrent scans limit. (Default = 0)
       --config CONFIG       Configuration for Qualys connector.
       -d DELAY, --delay DELAY
                             Wait DELAY seconds between scan attempts if
@@ -57,7 +65,7 @@ Usage
       -l, --no_list         Do not list all selected web applications. (Default =
                             False)
       -o OPTION_PROFILE, --option_profile OPTION_PROFILE
-                            Optionally override default option profile to scan 
+                            Optionally override default option profile to scan
                             selected web applications with OPTION_PROFILE ID.
       -r, --randomize       Randomize scanning of web applications.
       -s, --scan            Scan all selected web applications.
@@ -66,8 +74,6 @@ Usage
       -y SCAN_TYPE, --scan_type SCAN_TYPE
                             Scan type: discovery, vulnerability. (Default =
                             discovery)
-
-
 
 Screenshot
 
